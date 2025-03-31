@@ -1,11 +1,11 @@
 ## Aula 01
 
-[link](https://nearx.com.br/)
+Data: 20/03/2025
+
+[📺](https://drive.google.com/file/d/1XcqQOBQuqlCprzU9oYh-GK0P0RCbN1-c/view)
 
 ## Aula 02
 
-[link](https://nearx.com.br/)
+Data: 27/03/2025
 
-## Aula 03
-
-[link](https://nearx.com.br/)
+[📺](https://drive.google.com/file/d/13m7Ncb9ZbgFeDs7YGHZLcRaJM3ZgO8d6/view)
