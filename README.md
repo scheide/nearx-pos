@@ -1,15 +1,15 @@
 # Pós-Graduação Nearx: Tecnologia em Blockchain, Tokenização e Segurança em Smart Contracts
 
-Bem-vindo ao repositório do curso de Pós-Graduação Nearx! Este curso aborda tópicos fundamentais sobre blockchain, tokenização e segurança em smart contracts, com foco em aprendizado contínuo e aplicação prática.
+Bem-vindo ao repositório do curso de Pós-Graduação Nearx!
 
 ---
 
 ## Índice
 
-1. [Estratégias de Aprendizado e Planejamento de Carreira](#0-estratégias-de-aprendizado-e-planejamento-de-carreira)
-2. [Fundamentos de Blockchain](#1-fundamentos-de-blockchain)
-3. [Fundamentos de Economia e Finanças](#2-fundamentos-de-economia-e-finanças)
-4. [Fundamentos de Segurança](#3-fundamentos-de-segurança)
+0. [Estratégias de Aprendizado e Planejamento de Carreira](#0-estratégias-de-aprendizado-e-planejamento-de-carreira)
+1. [Fundamentos de Blockchain](#1-fundamentos-de-blockchain)
+2. [Fundamentos de Economia e Finanças](#2-fundamentos-de-economia-e-finanças)
+3. [Fundamentos de Segurança](#3-fundamentos-de-segurança)
 
 ---
 
