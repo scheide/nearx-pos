@@ -13,9 +13,18 @@ export default function ChangePasswordPage() {
   const handleChange = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setMessage("");
 
-    // Simula usuário autenticado
-    const user_id = "123456789";
+    // ✅ Bloqueia senhas com score abaixo de 3
+    if (strength < 3) {
+      setMessage(
+        "A nova senha está muito fraca. Tente usar uma frase ou palavras mais variadas."
+      );
+      setLoading(false);
+      return;
+    }
+
+    const user_id = "123456789"; // simulação
 
     fetch("http://localhost:8000/change-password", {
       method: "POST",
