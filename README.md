@@ -1,7 +1,5 @@
 # Pós-Graduação Nearx: Tecnologia em Blockchain, Tokenização e Segurança em Smart Contracts
 
-Bem-vindo ao repositório do curso de Pós-Graduação Nearx!
-
 ---
 
 ## Índice
