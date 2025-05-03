@@ -1,32 +1,24 @@
 import {
+    assert,
+    ByteString,
     method,
     prop,
+    sha256,
+    Sha256,
     SmartContract,
-    hash256,
-    assert,
-    SigHash
 } from 'scrypt-ts'
 
-import type {ByteString} from 'scrypt-ts';
-
 export class Helloworld extends SmartContract {
-    @prop(true)
-    count: bigint
+    @prop()
+    hash: Sha256
 
-    constructor(count: bigint) {
-        super(count)
-        this.count = count
+    constructor(hash: Sha256) {
+        super(...arguments)
+        this.hash = hash
     }
 
-    @method(SigHash.SINGLE)
-    public increment() {
-        this.count++
-
-        // make sure balance in the contract does not change
-        const amount: bigint = this.ctx.utxo.value
-        // output containing the latest state
-        const output: ByteString = this.buildStateOutput(amount)
-        // verify current tx has this single output
-        assert(this.ctx.hashOutputs === hash256(output), 'hashOutputs mismatch')
+    @method()
+    public unlock(message: ByteString) {
+        assert(sha256(message) == this.hash, 'Hash does not match')
     }
 }
