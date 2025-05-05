@@ -1,0 +1,21 @@
+{
+  "name": "hwhardhat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test",
+    "deploy:local": "npx hardhat run scripts/deploy.ts --network local",
+    "interact:local": "npx hardhat run scripts/interact.ts --network local",
+    "deploy:ign": "npx hardhat ignition deploy ignition/modules/HelloWorld.ts --network local"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.23.0"
+  }
+}
