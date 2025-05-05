@@ -14,7 +14,7 @@ module.exports = function override(config, env) {
     ({ constructor }) => constructor && constructor.name === 'ModuleScopePlugin'
   );
 
-  if(scopePluginIndex > 0) {
+  if(scopePluginIndex != -1) {
     config.resolve.plugins.splice(scopePluginIndex, 1);
   }
 
