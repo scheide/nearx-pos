@@ -47,9 +47,9 @@ contract ParOuImpar{
 
         bool isEven = (numberP2 + gameData.numberP1) % 2 == 0;
 
-        if(isEven && gameData.choiceP1 == 2)
+        if(isEven && gameData.choiceP1 == 1)
             gameData.lastWinner = 1;
-         else if(!isEven && gameData.choiceP1 == 1)
+         else if(!isEven && gameData.choiceP1 == 2)
             gameData.lastWinner = 1;
         else 
             gameData.lastWinner = 2;   

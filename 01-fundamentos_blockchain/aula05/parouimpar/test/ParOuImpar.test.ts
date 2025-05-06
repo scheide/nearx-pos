@@ -14,7 +14,6 @@ type GameData = {
 };
 
 function fetchGameData(rawGameData: any) {
-  
   const gameData: GameData = {
     choiceP1: Number(rawGameData[0]),
     numberP1: Number(rawGameData[1]),
@@ -23,7 +22,6 @@ function fetchGameData(rawGameData: any) {
    };
   return gameData;
 }
-
 
 describe("ParOuImpar", function () {
   // We define a fixture to reuse the same setup in every test.
@@ -40,24 +38,24 @@ describe("ParOuImpar", function () {
   }
 
   it("Should Have No Player", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     const gameData = fetchGameData(await parOuImpar.gameData());
     expect(gameData.choiceP1).to.equal(0);
   });
 
   
   it("Should not Init (Wrong Choice)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await expect(parOuImpar.initGame(3, 1)).to.be.revertedWith("Choose 1 or 2");
   });
 
   it("Should not Init (Wrong Number)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await expect(parOuImpar.initGame(1, 0)).to.be.revertedWith("Number choice must be between 1 and 10");
   });
 
   it("Should Init Game", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await parOuImpar.initGame(2, 5);
     const gameData = fetchGameData(await parOuImpar.gameData());
     expect(gameData.choiceP1).to.not.equal(0);
@@ -65,29 +63,29 @@ describe("ParOuImpar", function () {
 
 
   it("Should not Play Game (Choice == 0)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await parOuImpar.initGame(2, 5);
     const gameData = fetchGameData(await parOuImpar.gameData());
     expect(gameData.choiceP1).to.not.equal(0);
   });
 
   it("Should not Play Game (Wrong Number)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await parOuImpar.initGame(2, 5);
     await expect(parOuImpar.playGame(11)).to.be.revertedWith("Choose a number between 1 and 10");
   });
 
   it("Should Play Game (Winner P2)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
+    const { parOuImpar } = await loadFixture(deployFixture);
     await parOuImpar.initGame(2, 5);
-    await parOuImpar.playGame(6);
+    await parOuImpar.playGame(5);
     const lastGameData = fetchGameData(await parOuImpar.lastGameData());
     expect(lastGameData.lastWinner).to.equal(2);
   });
 
   it("Should Play Game (Winner P1)", async function () {
-    const { parOuImpar, player1, player2 } = await loadFixture(deployFixture);
-    await parOuImpar.initGame(2, 5);
+    const { parOuImpar } = await loadFixture(deployFixture);
+    await parOuImpar.initGame(1, 5);
     await parOuImpar.playGame(5);
     const lastGameData = fetchGameData(await parOuImpar.lastGameData());
     expect(lastGameData.lastWinner).to.equal(1);
