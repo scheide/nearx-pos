@@ -1,14 +1,11 @@
-import React, { useRef } from 'react';
-import logo from './logo.svg';
+import  { useRef } from 'react';
 import './App.css';
 
-import { DefaultProvider, sha256, toHex, PubKey, bsv, TestWallet, Tx, toByteString } from "scrypt-ts";
+import { DefaultProvider, sha256, bsv, TestWallet, toByteString } from "scrypt-ts";
 import { Helloworld } from "./contracts/helloworld";
-
 
 const provider = new DefaultProvider({network: bsv.Networks.testnet});
 let Alice: TestWallet
-let signerExt: TestWallet
 const privateKey = bsv.PrivateKey.fromHex("3c2ffdbb0a57c0cff0deacba15a92bf1d218dda9a9c7c668dd0640a6204b6394", bsv.Networks.testnet)   
 
 function App() {
@@ -16,7 +13,6 @@ function App() {
   const deploy = async (amount: any) => {
 
     Alice = new TestWallet(privateKey, provider)
-
     try {
       const signer = Alice
       const message = toByteString('hello world', true)
@@ -24,13 +20,7 @@ function App() {
       
       await instance.connect(signer);
           
-      const deployTx = await instance.deploy(100)
-      //console.log('Helloworld contract deployed: ', deployTx.id)
-      //alert('deployed: ' + deployTx.id)
-
-      //let tx = new bsv.Transaction(deployTx);
-
-      //tx.fromHex(deployTx)
+      const deployTx = await instance.deploy(82)
 
       console.log('Helloworld contract deployed: ', deployTx.id)
       alert('deployed: ' + deployTx.id)
@@ -42,13 +32,10 @@ function App() {
     }
   };
 
-
   const interact = async (amount: any) => {
 
     Alice = new TestWallet(privateKey, provider)
-
     try {
-
       const signer = Alice
       const message = toByteString('hello world', true)
       let tx = new bsv.Transaction
@@ -86,41 +73,24 @@ function App() {
         <button className="insert" onClick={deploy}
                 style={{ fontSize: '14px', paddingBottom: '2px', marginLeft: '5px'}}
         >Deploy</button>
-                              
-
-        {/* <img src={logo} className="App-logo" alt="logo" /> 
-        
-        <a
-          className="App-link"
-          href="https://www.youtube.com/watch?v=MnfzAx-A1oA&list=PLe_C0QmVAyivD40DXYtUVSAFmx7ntGjJZ"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn sCrypt
-        </a>
-        */}
+        {}
 
         <div>
-
-          <div style={{ textAlign: 'center' }}>
-                
+          <div style={{ textAlign: 'center' }}>   
                 <label style={{ fontSize: '14px', paddingBottom: '2px' }}
                   >Inform the Current TXID and press Unlock to use the Contract:  
                 </label>     
           </div>
-
           <div style={{ display: 'inline-block', textAlign: 'center' }}>
             <label style={{ fontSize: '14px', paddingBottom: '5px' }}  
                 > 
                     <input ref={txid} type="hex" name="PVTKEY1" min="1" defaultValue={'TXID'} placeholder="hex" />
                 </label>     
             </div>
-            <div style={{ display: 'inline-block', textAlign: 'center' }}>
-                
+            <div style={{ display: 'inline-block', textAlign: 'center' }}>              
                 <button className="insert" onClick={interact}
                     style={{ fontSize: '14px', paddingBottom: '2px', marginLeft: '20px'}}
                 >Unlock</button>
-
             </div>
         </div>                      
       </header>
