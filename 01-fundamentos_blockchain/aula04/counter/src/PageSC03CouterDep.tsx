@@ -1,69 +1,47 @@
-import React, { useRef, FC, useState} from 'react';
+import React, { useRef, useState} from 'react';
 import './App.css';
 
-import { DefaultProvider, sha256, toHex, PubKey, bsv, TestWallet, Tx, toByteString } from "scrypt-ts";
+import { DefaultProvider, bsv, TestWallet } from "scrypt-ts";
 import { Counter } from "./contracts/counter";
 
 let homepvtKey = "3c2ffdbb0a57c0cff0deacba15a92bf1d218dda9a9c7c668dd0640a6204b6394" 
 let homenetwork = bsv.Networks.testnet
-
-const provider = new DefaultProvider({network: homenetwork});
 let Alice: TestWallet
-let signerExt: TestWallet
 
 function PageSC03CouterDep() {
 
   const [deployedtxid, setdeptxid] = useState("");
-  const labelRef = useRef<HTMLLabelElement | null>(null);
   const [linkUrl, setLinkUrl] = useState("");
   let txlink2 = ""
   const stateInit = useRef<any>(null);
   const value = useRef<any>(null);
 
   const deploy = async (amount: any) => {
-
     let provider = new DefaultProvider({network: homenetwork});
-
-    if(homepvtKey.length != 64 || value.current.value < 1)
-    {
+    if(homepvtKey.length !== 64 || value.current.value < 1) {
       alert('No PVT KEY or wrong data!!!')
-    }
-    else
-    {
+    } else {
       setdeptxid("Wait!!!")
-
       let privateKey = bsv.PrivateKey.fromHex(homepvtKey, homenetwork)
-
       Alice = new TestWallet(privateKey, provider)
-
       try {
-
         const amount = value.current.value
 
         const signer = Alice
-
         await signer.connect(provider)
 
         const instance = new Counter(BigInt(stateInit.current.value))
-        
         await instance.connect(signer);
 
         const deployTx = await instance.deploy(amount);
-
         console.log('Counter contract deployed: ', deployTx.id)
-        
-        if(homenetwork === bsv.Networks.mainnet )
-        {
+        if(homenetwork === bsv.Networks.mainnet) {
           txlink2 = "https://whatsonchain.com/tx/" + deployTx.id;
-        }
-        else if (homenetwork === bsv.Networks.testnet )
-        {
+        } else if (homenetwork === bsv.Networks.testnet){
           txlink2 = "https://test.whatsonchain.com/tx/" + deployTx.id;
         }
         setLinkUrl(txlink2);
-  
         setdeptxid(deployTx.id)
-       
       } catch (e) {
         console.error('deploy Counter failed', e)
         alert('deploy Counter failed')
@@ -71,49 +49,35 @@ function PageSC03CouterDep() {
     }
   };
 
-
-
   return (
     <div className="App">
-        
         <header className="App-header">
-        
         <h2 style={{ fontSize: '34px', paddingBottom: '20px', paddingTop: '5px'}}>
-
           <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
           On Chain Counter - Create
-        
         </h2>
-
-        <div style={{ textAlign: 'center', paddingBottom: '20px' }}>
-                  
+        <div style={{ textAlign: 'center', paddingBottom: '20px' }}>     
                   <label style={{ fontSize: '14px', paddingBottom: '5px' }}
                     >Inform Value and Initial State then Press Deploy:  
                   </label>     
         </div>
-
         <div style={{ display: 'inline-block', textAlign: 'center', paddingBottom: '20px' }}>
             <label style={{ fontSize: '14px', paddingBottom: '0px' }}  
                 > 
                     <input ref={value} type="number" name="PVTKEY1" min="1" placeholder="satoshis (1 sat)" />
                 </label>     
         </div>
-
         <div style={{ display: 'inline-block', textAlign: 'center', paddingBottom: '20px' }}>
             <label style={{ fontSize: '14px', paddingBottom: '0px' }}  
                 > 
                     <input ref={stateInit} type="number" name="PVTKEY1" min="1" placeholder="initial state (a number)" />
                 </label>     
         </div>
-
-
         <button className="insert" onClick={deploy}
                 style={{ fontSize: '14px', paddingBottom: '2px', marginLeft: '5px'}}
-        >Deploy</button>
-                              
+        >Deploy</button>                
         {
           deployedtxid.length === 64?
-          
           <div>
           <div className="label-container" style={{ fontSize: '12px', paddingBottom: '0px', paddingTop: '20px' }}>
             <p className="responsive-label" style={{ fontSize: '12px' }}>TXID: {deployedtxid} </p>
@@ -127,10 +91,8 @@ function PageSC03CouterDep() {
           :
           <div className="label-container" style={{ fontSize: '12px', paddingBottom: '20px', paddingTop: '20px' }}>
           <p className="responsive-label" style={{ fontSize: '12px' }}>{deployedtxid} </p>
-        </div>
-          
+        </div>     
       }
-
       </header>
     </div>
   );
