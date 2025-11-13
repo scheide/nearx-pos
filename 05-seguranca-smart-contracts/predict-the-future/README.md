@@ -1,6 +1,6 @@
 # Predict The Future - Smart Contract Security Challenge
 
-A security challenge demonstrating critical vulnerabilities in blockchain randomness and how to exploit and fix them. This project is part of the NEARx POS course on Smart Contract Security.
+A security challenge demonstrating critical vulnerabilities in blockchain randomness and how to exploit and fix them.
 
 ## 📋 Overview
 
