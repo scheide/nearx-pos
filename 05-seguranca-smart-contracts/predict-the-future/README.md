@@ -130,6 +130,26 @@ This ensures users cannot predict the answer when they commit their guess.
 
 ## 🚀 Deployment
 
+### Creating a Deployment Module
+
+To deploy any of the contracts, you'll need to create an Ignition deployment module. Create a file like `ignition/modules/Deploy.ts`:
+
+```typescript
+import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
+
+const PredictTheFutureModule = buildModule("PredictTheFutureModule", (m) => {
+  // Deploy PredictTheFutureChallenge (vulnerable version - for testing only!)
+  // IMPORTANT: Send exactly 1 ETH when deploying
+  const predictTheFuture = m.contract("PredictTheFutureChallenge", [], {
+    value: m.getParameter("deployerFund", "1000000000000000000"), // 1 ETH in wei
+  });
+
+  return { predictTheFuture };
+});
+
+export default PredictTheFutureModule;
+```
+
 ### Deploy to Sepolia Testnet
 
 1. Set your private key:
@@ -144,8 +164,10 @@ This ensures users cannot predict the answer when they commit their guess.
 
 3. Deploy:
    ```bash
-   npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+   npx hardhat ignition deploy --network sepolia ignition/modules/Deploy.ts
    ```
+
+**Note:** Remember to send exactly 1 ETH when deploying `PredictTheFutureChallenge` (the constructor requires it).
 
 ## ⚠️ Warning
 
@@ -153,8 +175,4 @@ This ensures users cannot predict the answer when they commit their guess.
 
 ## 📝 License
 
-ISC
-
-## 🙏 Acknowledgments
-
-Part of the NEARx POS course on Smart Contract Security. Built with [Hardhat](https://hardhat.org/) and [Foundry](https://book.getfoundry.sh/).
+MIT
