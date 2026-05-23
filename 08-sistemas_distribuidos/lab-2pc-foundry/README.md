@@ -1,66 +1,20 @@
-## Foundry
+# Lab 2PC Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains the Foundry-based implementation for the final distributed systems lab, focusing on two-phase commit (2PC) behavior and smart contract coordination. The project includes Solidity contracts, Foundry tests, and helper scripts to model and verify the commit protocol in a local Ethereum-like environment.
 
-Foundry consists of:
+## Project structure
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- `src/` — Solidity contracts for 2PC and coordination logic
+- `test/` — Foundry test cases that validate commit/abort flows
+- `script/` — deployment and interaction scripts
 
-## Documentation
+## Quick start
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+forge build
+forge test
 ```
 
-### Test
+## Notes
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Use `anvil` for a local node and `cast` for manual contract interaction when needed.
